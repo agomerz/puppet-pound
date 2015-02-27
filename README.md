@@ -44,6 +44,24 @@ Usage
             }, ],
     }
     pound::entry {
+        'test' :
+            listen_ip => '0.0.0.0',
+            listen_port => '443',
+            listen_protocol => 'ListenHTTPS',
+            ssl_cert        => '/etc/ssl/certs/server.pem'
+            head_require => 'Host:.*files.myserver.com.*',
+            service => true,
+            backend => [ {
+              ip => '127.0.0.1',
+              port => '9999'
+            },
+            {
+              ip => '127.0.0.2',
+              port => '9998'
+            }, ],
+    }
+
+    pound::entry {
         'test2' :
             service => true,
             head_require => 'Host:.*share.myserver.com.*',
